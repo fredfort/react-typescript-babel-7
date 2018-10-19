@@ -1,0 +1,19 @@
+{
+  "moduleFileExtensions": [
+    "ts",
+    "tsx",
+    "js",
+    "jsx",
+    "json"
+  ],
+  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+  "transform": {
+    "^.+\\.tsx?$": "babel-jest"
+  },
+  "modulePathIgnorePatterns":[
+    "<rootDir>/cypress/"
+  ],
+  "setupFiles": [
+    "<rootDir>/test/testSetup.ts"
+  ]
+}
