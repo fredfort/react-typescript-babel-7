@@ -1,4 +1,4 @@
-# Project Title
+# React - TypeScript - Babel 7
 
 Boilerplate for your React project with TypeScript and Babel 7.
 Unit tests ( Jest/Enzyme) and end to end testing (Cypress) are also configured.
