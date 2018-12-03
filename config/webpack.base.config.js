@@ -11,15 +11,15 @@ module.exports = env => {
     output: {
       filename: '[name].bundle.js',
       chunkFilename: '[name].bundle.js',
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, '../dist'),
     },
     resolve: {
-      extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".avsc", ".scss"]
+      extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".scss"]
     },
     module: {
       rules: [
         {
-          test: /\.(ts|tsx)$/,
+          test: /\.(ts|tsx|js)$/,
           exclude: /node_modules/,
           use: {
             loader: "babel-loader"
