@@ -2,7 +2,8 @@ const webpack = require('webpack')
 const path = require('path')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin"); // Add this in top
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = env => {
   const { PLATFORM, VERSION } = env;
@@ -31,7 +32,7 @@ module.exports = env => {
             PLATFORM === "production"
               ? MiniCssExtractPlugin.loader
               : "style-loader",
-            "css-loader",
+            "css-loader?modules&importLoaders=1&localIdentName=[name]__[local]",
             "sass-loader"
           ]
         }
@@ -45,7 +46,8 @@ module.exports = env => {
       new webpack.DefinePlugin({
         "process.env.PLATFORM": JSON.stringify(env.PLATFORM)
       }),
-      new CopyWebpackPlugin([{ from: "src/static" }]) // Add this in the plugins section
+      new CopyWebpackPlugin([{ from: "src/static" }]),
+      new ForkTsCheckerWebpackPlugin()
     ]
   };
 };

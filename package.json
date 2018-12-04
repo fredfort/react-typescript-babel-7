@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "type-check-watch": "tsc --noEmit -w",
     "type-check": "tsc -p . --noEmit",
     "test": "jest --config jest.config.json",
-    "start": "webpack-dev-server --mode development --config config/webpack.base.config.js --open --hot --history-api-fallback --env.PLATFORM=dev --env.VERSION=stag",
-    "prebuild": "npm run type-check",
+    "typed-css-modules": "tcm -p 'src/**/*.scss' --camelCase",
+    "typed-css-modules-w": "tcm -p 'src/**/*.scss' --camelCase -w",
+    "start": "npm run typed-css-modules-w | webpack-dev-server --mode development --config config/webpack.base.config.js --open --hot --history-api-fallback --env.PLATFORM=dev --env.VERSION=stag",
+    "prebuild": "npm run typed-css-modules | npm run type-check",
     "build": "webpack --mode production --config config/webpack.prod.config.js --env.PLATFORM=production --env.VERSION=stag --progress",
     "e2e": "cypress run"
   },
@@ -21,7 +22,6 @@
     "@babel/preset-env": "^7.0.0-beta.51",
     "@babel/preset-react": "^7.0.0-beta.51",
     "@babel/preset-typescript": "^7.1.0",
-    "@cypress/webpack-preprocessor": "^3.0.0",
     "@types/enzyme": "^3.1.14",
     "@types/enzyme-adapter-react-16": "^1.0.3",
     "@types/jest": "^23.3.5",
@@ -30,12 +30,14 @@
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.0-beta.0",
+    "clean-webpack-plugin": "^1.0.0",
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
-    "cypress": "^3.1.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
+    "fork-ts-checker-webpack-plugin": "^0.5.0",
     "html-webpack-plugin": "^3.2.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^23.6.0",
     "mini-css-extract-plugin": "^0.4.3",
     "node-sass": "^4.8.3",
@@ -48,6 +50,7 @@
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
     "tslint-react": "^3.6.0",
+    "typed-css-modules": "^0.3.7",
     "typescript": "^3.1.3",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^4.12.0",
@@ -57,8 +60,11 @@
     "webpack-visualizer-plugin": "^0.1.11"
   },
   "dependencies": {
-    "express": "^4.16.4",
     "react": "^16.5.2",
     "react-dom": "^16.5.2"
+  },
+  "optionalDependencies": {
+    "cypress": "^3.1.0",
+    "@cypress/webpack-preprocessor": "^3.0.0"
   }
 }

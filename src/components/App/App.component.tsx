@@ -1,18 +1,20 @@
+
 import * as React from "react";
 import { hot } from 'react-hot-loader'
+import { appStyle } from './App.scss';
 
-export interface IHelloProps {
+export interface IAppProps {
   compiler: string
   framework: string;
 }
 
-export interface IHelloState {
+export interface IAppState {
   showDetails: boolean
 }
 
 export const title = "title";
 
-class Hello extends React.PureComponent<IHelloProps, IHelloState>{
+class App extends React.PureComponent<IAppProps, IAppState>{
   public state = {
     showDetails: false
   }
@@ -22,13 +24,13 @@ class Hello extends React.PureComponent<IHelloProps, IHelloState>{
   }
 
   public renderDetails(): JSX.Element{
-    return <div>Details</div>
+    return <div>Details to show HMR</div>
   }
 
   public render() : JSX.Element{
     const {compiler, framework} = this.props
     return (
-      <div>
+      <div className={appStyle}>
         <h1 title={process.env.PLATFORM} id={title}>
           Hello from {compiler} and {framework}!
         </h1>
@@ -39,4 +41,4 @@ class Hello extends React.PureComponent<IHelloProps, IHelloState>{
   }
 };
 
-export default hot(module)(Hello)
+export default hot(module)(App)
